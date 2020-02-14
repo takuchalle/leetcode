@@ -1,0 +1,9 @@
+---
+BasedOnStyle:  Google # ここを上記の別のスタイルにすることで変えられる
+IndentWidth:   4
+---
+Language:        Cpp
+Standard:        Cpp11
+IndentCaseLabels: false
+TabWidth:        4
+UseTab:          ForIndentation
