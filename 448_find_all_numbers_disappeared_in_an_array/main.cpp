@@ -1,4 +1,6 @@
+#include <algorithm>
 #include <bitset>
+#include <cmath>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -9,16 +11,15 @@ using namespace std;
 class Solution {
    public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
-        int n = nums.size();
         auto ans = vector<int>();
-        auto tmp = vector<bool>(n, false);
-        for (auto& var : nums) {
-            tmp[var - 1] = true;
+        for (size_t i = 0; i < nums.size(); i++) {
+            int idx = abs(nums[i]) - 1;
+            nums[idx] = -abs(nums[idx]);
+        }
+        for (size_t i = 0; i < nums.size(); i++) {
+            if (nums[i] > 0) ans.push_back(i);
         }
 
-        for (size_t i = 0; i < n; i++) {
-            if (!tmp[i]) ans.push_back(i + 1);
-        }
         return ans;
     }
 };
