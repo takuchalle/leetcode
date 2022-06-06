@@ -27,7 +27,6 @@ class Solution {
         }
 
         // step 3
-        // step 3
         while ('0' <= s[pos] && s[pos] <= '9') {
             tmp = tmp * 10 + s[pos] - '0';
 
