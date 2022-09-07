@@ -8,32 +8,20 @@
 using namespace std;
 
 class Solution {
-   private:
-	   bool pruneNode(TreeNode* node) {
-		   if(node == nullptr) return false;
-		   bool hasRight = false, hasLeft = false;
-
-		   if(node->right != nullptr) {
-			   hasRight = pruneNode(node->right);
-			   if(!hasRight) {
-				   delete (node->right);
-				   node->right = nullptr;
-			   }
-		   }
-			   
-		   if(node->left != nullptr) {
-			   hasLeft = pruneNode(node->left);
-			   if(!hasLeft) {
-				   delete (node->left);
-				   node->left = nullptr;
-			   }
-		   }
-	
-		   return node->val == 1 || hasRight || hasLeft;
-	   }
-
    public:
-    TreeNode* pruneTree(TreeNode* root) { return pruneNode(root) ? root : nullptr; }
+    TreeNode* pruneTree(TreeNode* root) {
+        if (!root) return nullptr;
+
+        root->right = pruneTree(root->right);
+        root->left = pruneTree(root->left);
+
+        if (root->val == 1 || root->right || root->left) {
+            return root;
+        } else {
+            delete root;
+            return nullptr;
+        }
+    }
 };
 
 int main(int argc, char* argv[]) {
