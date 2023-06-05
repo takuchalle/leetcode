@@ -12,7 +12,7 @@ class Solution {
         double y = (coordinates[1][1] - coordinates[0][1]);
         double x = (coordinates[1][0] - coordinates[0][0]);
 
-        double slope = 1;
+        double slope = std::numeric_limits<double>::max();
         if (x != 0) {
             slope = y / x;
         }
@@ -21,7 +21,7 @@ class Solution {
             double y = (coordinates[i - 1][1] - coordinates[i][1]);
             double x = (coordinates[i - 1][0] - coordinates[i][0]);
 
-            double slope2 = 1;
+            double slope2 = std::numeric_limits<double>::max();
             if (x != 0) {
                 slope2 = y / x;
             }
