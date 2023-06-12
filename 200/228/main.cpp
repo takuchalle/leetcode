@@ -10,32 +10,16 @@ class Solution {
     vector<string> summaryRanges(vector<int>& nums) {
         auto ans = vector<string>();
 
-        auto q = queue<int>();
         for (size_t i = 0; i < nums.size(); i++) {
-            if (q.empty()) {
-                q.push(nums[i]);
-            } else {
-                if (q.back() + 1 == nums[i]) {
-                    q.push(nums[i]);
-                } else {
-                    if (q.size() == 1) {
-                        ans.push_back(to_string(q.front()));
-                    } else {
-                        ans.push_back(to_string(q.front()) + "->" +
-                                      to_string(q.back()));
-                    }
-                    q = queue<int>();
-                    q.push(nums[i]);
-                }
+            int j = i;
+            while (j + 1 < nums.size() && nums[j] + 1 == nums[j + 1]) {
+                j++;
             }
-        }
 
-        if (!q.empty()) {
-            if (q.size() == 1) {
-                ans.push_back(to_string(q.front()));
+            if (i == j) {
+                ans.push_back(to_string(nums[i]));
             } else {
-                ans.push_back(to_string(q.front()) + "->" +
-                              to_string(q.back()));
+                ans.push_back(to_string(nums[i]) + "->" + to_string(nums[j]));
             }
         }
 
@@ -45,6 +29,14 @@ class Solution {
 
 int main(int argc, char* argv[]) {
     auto s = new Solution();
+
+    {
+        auto nums = vector<int>{-1};
+        auto res = s->summaryRanges(nums);
+        for (auto& v : res) {
+            cout << v << endl;
+        }
+    }
 
     delete s;
     return 0;
